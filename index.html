@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Merchant Application</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+
+  input[type="text"] {
+    padding: 10px;
+    margin: 10px;
+    width: 300px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+  }
+
+  button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  button:hover {
+    background-color: #0056b3;
+  }
+
+  #qrcode {
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 200px; /* Adjust width as needed */
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Merchant Application</h2>
+  <label for="amount">Enter Amount:</label>
+  <input type="text" id="amount" placeholder="Enter amount">
+  <br>
+  <button onclick="generateQRCode()">Generate PhonePe QR Code</button>
+  <div id="qrcode"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+  function generateQRCode() {
+    var amount = document.getElementById('amount').value;
+    if (!amount) {
+      alert("Please enter a valid amount.");
+    } else {
+      var qrCodeDiv = document.getElementById('qrcode');
+      qrCodeDiv.innerHTML = ''; // Clear previous QR code if any
+      var qr = new QRCode(qrCodeDiv, {
+        text: 'upi://pay?pa=6300972219@ybl&pn=MerchantName&tn=Payment&am=' + amount + '&cu=INR', // Modify with your PhonePe ID and Merchant Name
+        width: 200,
+        height: 200
+      });
+    }
+  }
+</script>
+
+</body>
+</html>
